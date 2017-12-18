@@ -2,6 +2,7 @@ from selenium.webdriver import PhantomJS
 from selenium.webdriver.support.ui import WebDriverWait
 from bs4 import BeautifulSoup
 import requests
+import argparse
 def getHtmlSource(url,time=10):
     driver=PhantomJS( service_args=['--ignore-ssl-errors=true', '--ssl-protocol=any', '--web-security=false'])
     driver.get(url)
@@ -23,8 +24,8 @@ def getLinks(url):
     names=[span.text for span in names]
     divs=[ids(div) for div in divs]
     links={}
-    #print(names)
-    #print(divs)
+    print(names)
+    print(divs)
     for name,div in zip(names,divs):
         url="https://drive.google.com/uc?export=download&id={}".format(div)
         resp=requests.head(url)
@@ -34,6 +35,10 @@ def getLinks(url):
             print("video={}\nDownload_link={}\n".format(name,url))
     return links
 if __name__=="__main__":
-   url="" #enter the url
-   links=getLinks(url)
+    parser=argparse.ArgumentParser()
+    parser.add_argument("url",help="enter the Gdrive link",type=str)
+    args=parser.parse_args()
+    url=args.url
+    links=getLinks(url)
+
 
