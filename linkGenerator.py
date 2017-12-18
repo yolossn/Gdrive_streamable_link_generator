@@ -32,7 +32,7 @@ def getLinks(url):
         print(url)
         if resp.status_code!=404:
             links[name]=url
-            #print("video={}\nDownload_link={}\n".format(name,url))
+            print("video={}\nDownload_link={}\n".format(name,url))
     return links
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
