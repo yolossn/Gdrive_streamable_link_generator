@@ -24,15 +24,15 @@ def getLinks(url):
     names=[span.text for span in names]
     divs=[ids(div) for div in divs]
     links={}
-    print(names)
-    print(divs)
+    #print(names)
+    #print(divs)
     for name,div in zip(names,divs):
         url="https://drive.google.com/uc?export=download&id={}".format(div)
         resp=requests.head(url)
         print(url)
         if resp.status_code!=404:
             links[name]=url
-            print("video={}\nDownload_link={}\n".format(name,url))
+            #print("video={}\nDownload_link={}\n".format(name,url))
     return links
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
@@ -40,5 +40,6 @@ if __name__=="__main__":
     args=parser.parse_args()
     url=args.url
     links=getLinks(url)
+    print(links)
 
 
